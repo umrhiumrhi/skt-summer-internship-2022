@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NuguButton">
+        <attr name="types" format="enum">
+            <enum name="fab" value="0" />
+            <enum name="button" value="1" />
+        </attr>
+        <attr name="colors" format="enum">
+            <enum name="blue" value="0" />
+            <enum name="white" value="1" />
+        </attr>
+        <attr name="autoPlay" format="boolean"/>
+        <attr name="loopPlay" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="NuguFloatingActionButton">
+        <attr name="fab_micLargeDrawable" format="reference"/>
+        <attr name="fab_nuguLargeDrawable" format="reference"/>
+        <attr name="fab_micStandardDrawable" format="reference"/>
+        <attr name="fab_nuguStandardDrawable" format="reference"/>
+        <attr name="fab_color" format="color"/>
+        <attr name="fab_borderColor" format="color"/>
+        <attr name="fab_duration" format="integer"/>
+        <attr name="fab_elevation" format="integer"/>
+        <attr name="fab_autoPlay" format="boolean"/>
+        <attr name="fab_loop" format="boolean"/>
+        <attr name="fab_sizes" format="enum">
+            <enum name="standard" value="0" />
+            <enum name="large" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>
