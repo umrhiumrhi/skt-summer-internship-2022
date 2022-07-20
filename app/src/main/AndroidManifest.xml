@@ -19,28 +19,28 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-
+        <activity
+            android:name=".activity.main.IntentActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.main.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.SettingsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-
         <activity android:name=".activity.GuideActivity" />
         <activity
             android:name=".activity.SettingsServiceActivity"
@@ -56,14 +56,13 @@
                     android:scheme="@string/nugu_redirect_scheme" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.SettingsAgreementActivity" />
 
         <service android:name=".service.MusicPlayerService" />
-
         <service
             android:name=".service.SampleAppService"
             android:enabled="true"
-            android:permission="android.permission.SYSTEM_ALERT_WINDOW"/>
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
     </application>
+
 </manifest>

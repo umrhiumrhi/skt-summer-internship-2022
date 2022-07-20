@@ -39,6 +39,7 @@ import com.skt.nugu.sampleapp.BuildConfig
 import com.skt.nugu.sampleapp.R
 import com.skt.nugu.sampleapp.activity.LoginActivity
 import com.skt.nugu.sampleapp.activity.SettingsActivity
+import com.skt.nugu.sampleapp.activity.main.MainActivity.Companion.invokeActivity
 import com.skt.nugu.sampleapp.client.ClientManager
 import com.skt.nugu.sampleapp.client.ExponentialBackOff
 import com.skt.nugu.sampleapp.client.TokenRefresher
@@ -428,6 +429,9 @@ class MainActivity : AppCompatActivity(), SpeechRecognizerAggregatorInterface.On
         when (item.itemId) {
             R.id.nav_setting -> {
                 SettingsActivity.invokeActivity(this)
+            }
+            R.id.nav_intent -> {
+                IntentActivity.invokeActivity(this)
             }
         }
         return true
