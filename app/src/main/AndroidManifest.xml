@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
     <application
         android:name=".application.SampleApplication"
         android:allowBackup="false"
@@ -20,7 +23,10 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".activity.main.IntentActivity"
+            android:name=".activity.main.IntentTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.main.IntentResolveActivity"
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"

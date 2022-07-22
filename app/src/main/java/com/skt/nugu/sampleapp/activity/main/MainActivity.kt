@@ -39,7 +39,6 @@ import com.skt.nugu.sampleapp.BuildConfig
 import com.skt.nugu.sampleapp.R
 import com.skt.nugu.sampleapp.activity.LoginActivity
 import com.skt.nugu.sampleapp.activity.SettingsActivity
-import com.skt.nugu.sampleapp.activity.main.MainActivity.Companion.invokeActivity
 import com.skt.nugu.sampleapp.client.ClientManager
 import com.skt.nugu.sampleapp.client.ExponentialBackOff
 import com.skt.nugu.sampleapp.client.TokenRefresher
@@ -61,8 +60,6 @@ import com.skt.nugu.sdk.platform.android.login.auth.NuguOAuthError
 import com.skt.nugu.sdk.platform.android.speechrecognizer.KeywordDetector
 import com.skt.nugu.sdk.platform.android.speechrecognizer.SpeechRecognizerAggregator
 import com.skt.nugu.sdk.platform.android.speechrecognizer.SpeechRecognizerAggregatorInterface
-import com.skt.nugu.sdk.platform.android.ux.template.TemplateView
-import com.skt.nugu.sdk.platform.android.ux.template.TemplateView.Companion.MEDIA_TEMPLATE_TYPES
 import com.skt.nugu.sdk.platform.android.ux.template.presenter.TemplateFragment
 import com.skt.nugu.sdk.platform.android.ux.template.presenter.TemplateRenderer
 import com.skt.nugu.sdk.platform.android.ux.widget.*
@@ -430,8 +427,11 @@ class MainActivity : AppCompatActivity(), SpeechRecognizerAggregatorInterface.On
             R.id.nav_setting -> {
                 SettingsActivity.invokeActivity(this)
             }
-            R.id.nav_intent -> {
-                IntentActivity.invokeActivity(this)
+            R.id.nav_test_common_intent -> {
+                IntentTestActivity.invokeActivity(this)
+            }
+            R.id.nav_get_test_resolve_intent -> {
+                IntentResolveActivity.invokeActivity(this)
             }
         }
         return true

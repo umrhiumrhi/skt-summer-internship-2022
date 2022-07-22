@@ -9,21 +9,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.skt.nugu.sampleapp.activity.SettingsActivity
-import com.skt.nugu.sampleapp.databinding.ActivityIntentBinding
+import com.skt.nugu.sampleapp.databinding.ActivityIntentTestBinding
 
+class IntentTestActivity : AppCompatActivity() {
 
-class IntentActivity : AppCompatActivity() {
-
-    lateinit var binding : ActivityIntentBinding
+    lateinit var binding : ActivityIntentTestBinding
     companion object {
-        private const val TAG = "IntentActivity"
+        private const val TAG = "IntentTestActivity"
         fun invokeActivity(context: Context) {
-            context.startActivity(Intent(context, IntentActivity::class.java))
+            context.startActivity(Intent(context, IntentTestActivity::class.java))
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityIntentBinding.inflate(layoutInflater)
+        binding = ActivityIntentTestBinding.inflate(layoutInflater)
 
         binding.intentDialBtn.setOnClickListener {
             dialPhoneNumber("01075705994")

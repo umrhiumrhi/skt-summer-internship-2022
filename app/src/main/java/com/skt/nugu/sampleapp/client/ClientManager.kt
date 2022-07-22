@@ -24,6 +24,8 @@ import android.util.Log
 import com.skt.nugu.sampleapp.R
 import com.skt.nugu.sampleapp.player.SamplePlayerFactory
 import com.skt.nugu.sampleapp.utils.PreferenceHelper
+import com.skt.nugu.sampleapp.utils.TLog
+import com.skt.nugu.sdk.agent.asr.ASRAgentInterface
 import com.skt.nugu.sdk.agent.audioplayer.AudioPlayerAgentInterface
 import com.skt.nugu.sdk.agent.mediaplayer.ErrorType
 import com.skt.nugu.sdk.agent.permission.PermissionDelegate
@@ -337,6 +339,30 @@ object ClientManager : AudioPlayerAgentInterface.Listener {
         }
 
         client.setStateProvider(wakeupWordStateProvider.namespaceAndName, wakeupWordStateProvider)
+
+        client.addASRResultListener(object: ASRAgentInterface.OnResultListener{
+
+            val intentResolver = IntentDispatcher(context)
+
+            override fun onNoneResult(header: Header) {
+
+            }
+
+            override fun onPartialResult(result: String, header: Header) {
+            }
+
+            override fun onCompleteResult(result: String, header: Header) {
+                TLog.i(TAG, "onCompleteResult() result:$result")
+                intentResolver.onAsrResultComplete(result, header)
+            }
+
+            override fun onError(type: ASRAgentInterface.ErrorType, header: Header, allowEffectBeep: Boolean) {
+            }
+
+            override fun onCancel(cause: ASRAgentInterface.CancelCause, header: Header) {
+            }
+
+        } )
 
         initialized = true
         observer?.onInitialized()
