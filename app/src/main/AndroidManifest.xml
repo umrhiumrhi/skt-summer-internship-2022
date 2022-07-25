@@ -11,9 +11,15 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
+<<<<<<< HEAD
     <queries>
         <package android:name="com.nhn.android.search"/>
     </queries>
+=======
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+>>>>>>> 6c04efb3405d76f912992ecaa6ac6b2e4e00d450
     <application
         android:name=".application.SampleApplication"
         android:allowBackup="false"
@@ -25,7 +31,10 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".activity.main.IntentActivity"
+            android:name=".activity.main.IntentTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.main.IntentResolveActivity"
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"

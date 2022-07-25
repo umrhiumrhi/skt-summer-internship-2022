@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+<<<<<<< HEAD:app/src/main/java/com/skt/nugu/sampleapp/activity/main/IntentActivity.kt
 import com.skt.nugu.sampleapp.databinding.ActivityIntentBinding
 import java.net.URLEncoder
 
@@ -20,14 +21,22 @@ class IntentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntentBinding
     lateinit var pkgList: MutableList<PackageInfo>
 
+=======
+import com.skt.nugu.sampleapp.databinding.ActivityIntentTestBinding
+
+class IntentTestActivity : AppCompatActivity() {
+
+    lateinit var binding : ActivityIntentTestBinding
+>>>>>>> 6c04efb3405d76f912992ecaa6ac6b2e4e00d450:app/src/main/java/com/skt/nugu/sampleapp/activity/main/IntentTestActivity.kt
     companion object {
-        private const val TAG = "IntentActivity"
+        private const val TAG = "IntentTestActivity"
         fun invokeActivity(context: Context) {
-            context.startActivity(Intent(context, IntentActivity::class.java))
+            context.startActivity(Intent(context, IntentTestActivity::class.java))
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+<<<<<<< HEAD:app/src/main/java/com/skt/nugu/sampleapp/activity/main/IntentActivity.kt
         init()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,6 +45,9 @@ class IntentActivity : AppCompatActivity() {
     private fun init() {
         binding = ActivityIntentBinding.inflate(layoutInflater)
         pkgList = getAndDisplayAllPackages()
+=======
+        binding = ActivityIntentTestBinding.inflate(layoutInflater)
+>>>>>>> 6c04efb3405d76f912992ecaa6ac6b2e4e00d450:app/src/main/java/com/skt/nugu/sampleapp/activity/main/IntentTestActivity.kt
 
         binding.intentDialBtn.setOnClickListener {
             dialPhoneNumber("01075705994")
