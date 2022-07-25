@@ -8,7 +8,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
+    <queries>
+        <package android:name="com.nhn.android.search"/>
+    </queries>
     <application
         android:name=".application.SampleApplication"
         android:allowBackup="false"
