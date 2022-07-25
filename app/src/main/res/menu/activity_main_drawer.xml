@@ -9,8 +9,11 @@
                 android:id="@+id/nav_setting"
                 android:title="@string/menu_setting" />
             <item
-                android:id="@+id/nav_intent"
-                android:title="인텐트 테스트" />
+                android:id="@+id/nav_test_common_intent"
+                android:title="공통 인텐트 테스트" />
+            <item
+                android:id="@+id/nav_get_test_resolve_intent"
+                android:title="Get &amp; Test Intents" />
         </menu>
     </item>
 
