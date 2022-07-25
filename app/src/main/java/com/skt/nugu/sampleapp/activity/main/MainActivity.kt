@@ -433,6 +433,9 @@ class MainActivity : AppCompatActivity(), SpeechRecognizerAggregatorInterface.On
             R.id.nav_get_test_resolve_intent -> {
                 IntentResolveActivity.invokeActivity(this)
             }
+            R.id.nav_resolve_info_list -> {
+                ResolveInfoListActivity.invokeActivity(this)
+            }
         }
         return true
     }

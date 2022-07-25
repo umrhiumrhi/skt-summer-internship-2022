@@ -8,18 +8,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
-<<<<<<< HEAD
-    <queries>
-        <package android:name="com.nhn.android.search"/>
-    </queries>
-=======
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
-
->>>>>>> 6c04efb3405d76f912992ecaa6ac6b2e4e00d450
     <application
         android:name=".application.SampleApplication"
         android:allowBackup="false"
@@ -30,6 +22,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
+        <activity
+            android:name=".activity.main.ResolveInfoListActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.main.IntentTestActivity"
             android:exported="false" />
