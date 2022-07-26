@@ -62,12 +62,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/map_edit_text" />
 
+    <Button
+        android:id="@+id/intent_media_play_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="media play with search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/intent_naver_search_btn" />
+
     <EditText
         android:id="@+id/naver_search_edit_text"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/intent_naver_search_btn" />
+        app:layout_constraintTop_toBottomOf="@id/intent_media_play_search" />
 
     <Button
         android:id="@+id/launch_app_keyword_btn"
