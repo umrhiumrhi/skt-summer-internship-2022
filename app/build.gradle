@@ -142,6 +142,9 @@ dependencies {
 
     implementation "androidx.compose.compiler:compiler:1.1.0-alpha01"
 
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.7'
+
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.0-alpha01'
 }
