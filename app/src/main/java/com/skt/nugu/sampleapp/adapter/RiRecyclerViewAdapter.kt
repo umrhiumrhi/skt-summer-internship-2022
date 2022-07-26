@@ -2,6 +2,7 @@ package com.skt.nugu.sampleapp.adapter
 
 import android.app.DownloadManager
 import android.app.SearchManager
+import android.app.SearchManager.QUERY
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -52,13 +53,21 @@ class RiRecyclerViewAdapter(
             itemView.findViewById<TextView>(R.id.resolve_info_label).text =
                 item[0].loadLabel(context.packageManager).toString()
 
+
+            val actionList: List<String> = listOf(
+                Intent.ACTION_MAIN,
+                Intent.ACTION_SEARCH,
+                Intent.ACTION_VIEW,
+                Intent.ACTION_WEB_SEARCH
+            )
+
             when (index) {
-                3 -> {
+                3, 1 -> {
                     queryEditText.apply {
                         visibility = View.VISIBLE
                     }
                     itemView.findViewById<Button>(R.id.launch_btn).setOnClickListener {
-                        val intent: Intent = Intent(Intent.ACTION_WEB_SEARCH)
+                        val intent: Intent = Intent(actionList[index])
                         intent.setClassName(
                             item[0].activityInfo.packageName,
                             item[0].activityInfo.name
@@ -71,7 +80,7 @@ class RiRecyclerViewAdapter(
                 else -> {
                     queryEditText.visibility = View.GONE
                     itemView.findViewById<Button>(R.id.launch_btn).setOnClickListener {
-                        val intent: Intent = Intent(Intent.ACTION_MAIN)
+                        val intent: Intent = Intent(actionList[index])
                         intent.setClassName(
                             item[0].activityInfo.packageName,
                             item[0].activityInfo.name
@@ -80,7 +89,6 @@ class RiRecyclerViewAdapter(
                     }
                 }
             }
-
         }
     }
 }

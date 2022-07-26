@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sampleapp</string>
+    <string name="app_name">Intent Test Application</string>
 
     <string name="nugu_redirect_scheme">YOUR REDIRECT URI SCHEME</string>
     <string name="nugu_redirect_host">YOUR REDIRECT URI HOST</string>

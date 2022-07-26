@@ -91,10 +91,10 @@ class ResolveInfoListActivity : AppCompatActivity() {
                                 intent,
                                 0
                             ) as ArrayList<ResolveInfo>
+
                         if (ris.isNotEmpty()) {
                             tmpResolveInfoArrayList.add(ris)
-                        }
-                        if (ris.isEmpty()) {
+                        } else {
                             continue
                         }
 

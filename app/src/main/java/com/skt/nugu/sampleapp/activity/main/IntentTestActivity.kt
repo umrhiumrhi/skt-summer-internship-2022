@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.skt.nugu.sampleapp.utils.SimilarityChecker
 import com.skt.nugu.sampleapp.databinding.ActivityIntentTestBinding
 import java.net.URLEncoder
 
@@ -30,6 +31,8 @@ class IntentTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         init()
+        val list = SimilarityChecker().findSimilarity("아이쿠야", "아이쿠야")
+        Log.d("editdistance", list.toString())
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
     }
@@ -47,15 +50,15 @@ class IntentTestActivity : AppCompatActivity() {
         }
 
         binding.intentMapOpenBtn.setOnClickListener {
-            launchMapApp(binding.mapEditText.text.toString())
+            launchMapApp(binding.queryEditText.text.toString())
         }
 
         binding.intentNaverSearchBtn.setOnClickListener {
-            onlyForSearch(binding.naverSearchEditText.text.toString())
+            onlyForSearch(binding.queryEditText.text.toString())
         }
 
         binding.launchAppKeywordBtn.setOnClickListener {
-            launchAppWithKeywordByUser(binding.keywordEditText.text.toString())
+            launchAppWithKeywordByUser(binding.queryEditText.text.toString())
         }
         binding.intentMediaPlaySearch.setOnClickListener {
             playSearchArtist()
@@ -64,7 +67,7 @@ class IntentTestActivity : AppCompatActivity() {
 
     private fun playSearchArtist() {
 
-        var artist = binding.naverSearchEditText.text.toString()
+        var artist = binding.queryEditText.text.toString()
 
         val intent = Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH).apply {
             putExtra(MediaStore.EXTRA_MEDIA_FOCUS, "vnd.android.cursor.item/*")
