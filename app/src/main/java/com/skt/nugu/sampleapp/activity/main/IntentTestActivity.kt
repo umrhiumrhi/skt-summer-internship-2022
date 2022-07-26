@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
@@ -55,6 +56,23 @@ class IntentTestActivity : AppCompatActivity() {
 
         binding.launchAppKeywordBtn.setOnClickListener {
             launchAppWithKeywordByUser(binding.keywordEditText.text.toString())
+        }
+        binding.intentMediaPlaySearch.setOnClickListener {
+            playSearchArtist()
+        }
+    }
+
+    private fun playSearchArtist() {
+
+        var artist = binding.naverSearchEditText.text.toString()
+
+        val intent = Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH).apply {
+            putExtra(MediaStore.EXTRA_MEDIA_FOCUS, "vnd.android.cursor.item/*")
+            putExtra(MediaStore.EXTRA_MEDIA_ARTIST, artist)
+            putExtra(SearchManager.QUERY, artist)
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
         }
     }
 
