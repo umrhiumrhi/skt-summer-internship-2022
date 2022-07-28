@@ -41,36 +41,28 @@ class ResolveInfoListActivity : AppCompatActivity() {
 
     private fun init() {
         disableAllButton()
-        getIntentResolveInfo(0)
+        getIntentResolveInfo(Intent.ACTION_MAIN)
 
         binding.mainBtn.setOnClickListener {
-            getIntentResolveInfo(0)
+            getIntentResolveInfo(Intent.ACTION_MAIN)
         }
         binding.searchBtn.setOnClickListener {
-            getIntentResolveInfo(1)
+            getIntentResolveInfo(Intent.ACTION_SEARCH)
         }
         binding.viewBtn.setOnClickListener {
-            getIntentResolveInfo(2)
+            getIntentResolveInfo(Intent.ACTION_VIEW)
         }
         binding.webSearchBtn.setOnClickListener {
-            getIntentResolveInfo(3)
+            getIntentResolveInfo(Intent.ACTION_WEB_SEARCH)
         }
     }
 
-    private fun getIntentResolveInfo(index: Int) {
+    private fun getIntentResolveInfo(intentAction: String) {
         disableAllButton()
         Thread {
             packageManager?.let {
                 var packageManager = it
                 val installedPackage = packageManager.getInstalledPackages(0)
-                // TODO: 외부에서 설정값 유입 가능 후보(1)
-                val actionList: List<String> = listOf(
-                    Intent.ACTION_MAIN,
-                    Intent.ACTION_SEARCH,
-                    Intent.ACTION_VIEW,
-                    Intent.ACTION_WEB_SEARCH
-                )
-                //  println("\"applicationList\" : [ {")
 
                 intentList.clear()
                 var tmpResolveInfoArrayList = ArrayList<ArrayList<ResolveInfo>>()
@@ -81,7 +73,7 @@ class ResolveInfoListActivity : AppCompatActivity() {
                     val versionName = pi.versionName
                     val appLabel = pi.applicationInfo.loadLabel(packageManager)
 
-                    for (action in listOf(actionList[index])) {
+                    for (action in listOf(intentAction)) {
                         val intent = Intent(action)
                         // TODO: 외부에서 설정값 유입 가능 후보(2)
                         //intent.addCategory(Intent.CATEGORY_LAUNCHER)
@@ -130,7 +122,7 @@ class ResolveInfoListActivity : AppCompatActivity() {
                         .show()
 
                     binding.resolveInfoRecyclerView.adapter =
-                        RiRecyclerViewAdapter(this, resolveInfoList, index)
+                        RiRecyclerViewAdapter(this, resolveInfoList, intentAction)
                     binding.resolveInfoRecyclerView.layoutManager = LinearLayoutManager(this)
                     (binding.resolveInfoRecyclerView.adapter)!!.notifyDataSetChanged()
 

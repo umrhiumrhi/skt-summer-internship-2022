@@ -20,7 +20,7 @@ import java.net.URLEncoder
 class IntentTestActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntentTestBinding
-    lateinit var pkgList: MutableList<PackageInfo>
+    private lateinit var pkgList: MutableList<PackageInfo>
 
     companion object {
         private const val TAG = "IntentTestActivity"
@@ -31,8 +31,6 @@ class IntentTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         init()
-        val list = SimilarityChecker().findSimilarity("아이쿠야", "아이쿠야")
-        Log.d("editdistance", list.toString())
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
     }
