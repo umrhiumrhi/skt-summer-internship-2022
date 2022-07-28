@@ -14,6 +14,7 @@ class IntentDispatcher(val context: Context) {
 
     companion object {
         private const val MATCH_THRESHOLD_VALUE : Double = 0.5
+        private const val COMPLETE_MATCH_VALUE : Double = 0.9999
     }
 
     val uiHandler = Handler(Looper.getMainLooper())
@@ -106,7 +107,7 @@ class IntentDispatcher(val context: Context) {
 
             if (similarity < MATCH_THRESHOLD_VALUE) {
                 continue
-            } else if (similarity > 0.9999) {
+            } else if (similarity > COMPLETE_MATCH_VALUE) {
                 mostSimilarResolveInfo = data[0]
                 maxSimilarity = similarity
                 break
