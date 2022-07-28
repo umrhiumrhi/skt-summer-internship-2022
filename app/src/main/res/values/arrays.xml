@@ -8,4 +8,15 @@
         <item>아리아</item>
         <item>팅커벨</item>
     </string-array>
+
+    <string-array name="spinnerItemList">
+        <item>실행</item>
+        <item>검색</item>
+    </string-array>
+
+    <string-array name="spinnerAppList">
+        <item>유튜브</item>
+        <item>구글</item>
+        <item>네이버</item>
+    </string-array>
 </resources>

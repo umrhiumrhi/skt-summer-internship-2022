@@ -79,12 +79,63 @@
         android:text="start app with keyword"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/command_select_text_view"
+        app:layout_constraintTop_toBottomOf="@id/launch_app_keyword_btn"
+        app:layout_constraintBottom_toTopOf="@id/command_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="동작 선택"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/command_spinner"
+        android:layout_width="200dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/command_select_text_view"
+        android:entries="@array/spinnerItemList"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:text="어플 선택"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/command_spinner"
+        app:layout_constraintBottom_toTopOf="@id/command_spinner"/>
+
+    <Spinner
+        android:id="@+id/app_spinner"
+        app:layout_constraintStart_toEndOf="@id/command_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/command_spinner"
+        android:layout_width="200dp"
+        android:entries="@array/spinnerAppList"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/query_2_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/command_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="검색어 입력..."/>
+
+    <Button
+        android:id="@+id/post_and_launch_btn"
+        android:text="POST &amp; LAUNCH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/app_spinner"
+        app:layout_constraintStart_toEndOf="@id/query_2_edit_text"/>
+
+
     <ScrollView
         android:id="@+id/pkg_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/launch_app_keyword_btn"
+        app:layout_constraintTop_toBottomOf="@id/post_and_launch_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

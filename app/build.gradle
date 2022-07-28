@@ -145,6 +145,9 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.7'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.0-alpha01'
 }
