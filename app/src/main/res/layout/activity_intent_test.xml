@@ -47,7 +47,8 @@
         app:layout_constraintBottom_toBottomOf="@id/google_map_check_box"/>
 
     <EditText
-        android:id="@+id/map_edit_text"
+        android:layout_marginTop="50dp"
+        android:id="@+id/query_edit_text"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/intent_map_open_btn"
@@ -60,7 +61,7 @@
         android:layout_height="wrap_content"
         android:text="search on naver"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/query_edit_text" />
 
     <Button
         android:id="@+id/intent_media_play_search"
@@ -70,43 +71,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/intent_naver_search_btn" />
 
-    <EditText
-        android:id="@+id/naver_search_edit_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/intent_media_play_search" />
-
     <Button
+        app:layout_constraintTop_toBottomOf="@id/intent_media_play_search"
         android:id="@+id/launch_app_keyword_btn"
-        android:text="start app with keyword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/naver_search_edit_text"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        app:layout_constraintTop_toBottomOf="@id/launch_app_keyword_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/keyword_edit_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"/>
+        android:text="start app with keyword"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:id="@+id/pkg_scroll_view"
         android:layout_width="0dp"
-        android:orientation="vertical"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/keyword_edit_text"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/launch_app_keyword_btn"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/pkg_scroll_view_inner_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
