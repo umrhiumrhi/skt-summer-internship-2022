@@ -65,9 +65,11 @@ class RiRecyclerViewAdapter(
                             item[0].activityInfo.name
                         )
                         intent.putExtra(SearchManager.QUERY, queryEditText.text.toString())
+                        Log.d("searchIntent", intent.toUri(Intent.URI_INTENT_SCHEME))
                         context.startActivity(intent)
                     }
                     itemView.findViewById<Button>(R.id.launch_btn).text = "SEARCH"
+
                 }
                 else -> {
                     queryEditText.visibility = View.GONE

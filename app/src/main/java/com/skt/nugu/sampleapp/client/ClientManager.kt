@@ -21,6 +21,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.skt.eaa.assistant.capability.client.ExtensionClient
 import com.skt.nugu.sampleapp.R
 import com.skt.nugu.sampleapp.player.SamplePlayerFactory
 import com.skt.nugu.sampleapp.utils.PreferenceHelper
@@ -280,6 +281,7 @@ object ClientManager : AudioPlayerAgentInterface.Listener {
                     Logger.d(TAG, "[requestPermissions] $types")
                 }
             })
+            .enableExtension(ExtensionClient(context))
             .build()
 
         client.addAudioPlayerListener(this)

@@ -7,12 +7,14 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.skt.nugu.sampleapp.databinding.ActivityIntentResolveBinding
 import com.skt.nugu.sampleapp.utils.TLog
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 
 class IntentResolveActivity : AppCompatActivity() {
 
@@ -95,7 +97,7 @@ class IntentResolveActivity : AppCompatActivity() {
                 var packageManager = it
                 val installedPackage = packageManager.getInstalledPackages(0)
                 // TODO: 외부에서 설정값 유입 가능 후보(1)
-                val actionList: List<String> = listOf(Intent.ACTION_MAIN/*,Intent.ACTION_SEARCH,Intent.ACTION_VIEW*/)
+                val actionList: List<String> = listOf(Intent.ACTION_MAIN,Intent.ACTION_SEARCH,Intent.ACTION_WEB_SEARCH)
                 //  println("\"applicationList\" : [ {")
                 val jsonObjectApplcation = JSONObject()
                 val jsonObjectApplcationList = JSONArray()

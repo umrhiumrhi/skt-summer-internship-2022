@@ -51,8 +51,12 @@ import com.skt.nugu.sdk.agent.asr.audio.AudioFormat
 import com.skt.nugu.sdk.agent.chips.Chip
 import com.skt.nugu.sdk.agent.sds.SharedDataStream
 import com.skt.nugu.sdk.agent.system.SystemAgentInterface
+import com.skt.nugu.sdk.client.ClientHelperInterface
+import com.skt.nugu.sdk.client.NuguClient
 import com.skt.nugu.sdk.client.configuration.ConfigurationStore
+import com.skt.nugu.sdk.core.interfaces.common.NamespaceAndName
 import com.skt.nugu.sdk.core.interfaces.connection.ConnectionStatusListener
+import com.skt.nugu.sdk.core.interfaces.context.*
 import com.skt.nugu.sdk.platform.android.NuguAndroidClient
 import com.skt.nugu.sdk.platform.android.login.auth.Credentials
 import com.skt.nugu.sdk.platform.android.login.auth.NuguOAuth
@@ -64,6 +68,13 @@ import com.skt.nugu.sdk.platform.android.ux.template.presenter.TemplateFragment
 import com.skt.nugu.sdk.platform.android.ux.template.presenter.TemplateRenderer
 import com.skt.nugu.sdk.platform.android.ux.widget.*
 import com.skt.nugu.sdk.platform.android.ux.widget.NuguButton.Companion.dpToPx
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URLDecoder
+import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity(), SpeechRecognizerAggregatorInterface.OnStateChangeListener,
     NavigationView.OnNavigationItemSelectedListener, ConnectionStatusListener, SystemAgentInterfaceListener,
@@ -673,7 +684,7 @@ class MainActivity : AppCompatActivity(), SpeechRecognizerAggregatorInterface.On
                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:$packageName")
                 )
-                startActivityForResult(intent, 1)
+                // startActivityForResult(intent, 1)
             } else {
                 startService()
             }

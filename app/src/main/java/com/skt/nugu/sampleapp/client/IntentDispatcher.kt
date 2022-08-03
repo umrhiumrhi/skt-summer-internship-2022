@@ -1,5 +1,6 @@
 package com.skt.nugu.sampleapp.client
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -9,6 +10,7 @@ import android.os.Looper
 import android.util.Log
 import com.skt.nugu.sampleapp.utils.SimilarityChecker
 import com.skt.nugu.sdk.core.interfaces.message.Header
+
 
 class IntentDispatcher(val context: Context) {
 
@@ -23,8 +25,9 @@ class IntentDispatcher(val context: Context) {
 
     fun onAsrResultComplete(result: String, header: Header) {
         //only action_main
-        var resolveInfoArrayList = ArrayList<ArrayList<ResolveInfo>>()
 
+        if (true) return // local 처리 비활성화
+        var resolveInfoArrayList = ArrayList<ArrayList<ResolveInfo>>()
         if (result.contains("실행") && result.indexOf("실행") != 0) {
             Thread {
                 isResolvedIntent = false
@@ -43,6 +46,33 @@ class IntentDispatcher(val context: Context) {
                             val intent = Intent(Intent.ACTION_MAIN)
                             intent.setClassName(it.activityInfo.packageName, it.activityInfo.name)
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                            isResolvedIntent = true
+                        } catch (e: Exception) {
+                            isResolvedIntent = false
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            }.start()
+        } else if (result.contains("검색") && result.indexOf("검색") != 0) {
+            Thread {
+                isResolvedIntent = false
+                val parsedResult = result.substring(0 until result.indexOf("검색") - 1)
+
+                resolveInfoArrayList = getResolveInfoListWithAction(3)
+
+                resolveInfoArrayList[0][0]?.let {
+                    Log.d("chkk",
+                        "[RESULT] appName : " + it.activityInfo.loadLabel(context.packageManager)
+                            .toString() + ", Utterance : " + parsedResult
+                    )
+                    uiHandler.post {
+                        try {
+                            val intent = Intent(Intent.ACTION_WEB_SEARCH)
+                            intent.setClassName(it.activityInfo.packageName, it.activityInfo.name)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.putExtra(SearchManager.QUERY, parsedResult)
                             context.startActivity(intent)
                             isResolvedIntent = true
                         } catch (e: Exception) {
@@ -117,6 +147,8 @@ class IntentDispatcher(val context: Context) {
             }
         }
 
+
         return mostSimilarResolveInfo
     }
+
 }
