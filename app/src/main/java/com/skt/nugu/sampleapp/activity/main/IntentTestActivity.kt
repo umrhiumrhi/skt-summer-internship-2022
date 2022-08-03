@@ -10,17 +10,29 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.skt.nugu.sampleapp.utils.SimilarityChecker
 import com.skt.nugu.sampleapp.databinding.ActivityIntentTestBinding
+import com.skt.nugu.sampleapp.utils.RetrofitInterface
+import com.skt.nugu.sampleapp.utils.TestingDirective
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.net.URLEncoder
 
 class IntentTestActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntentTestBinding
     private lateinit var pkgList: MutableList<PackageInfo>
+    private lateinit var retrofitService : RetrofitInterface
+
+    var dataToPost = HashMap<String, Any>()
 
     companion object {
         private const val TAG = "IntentTestActivity"
@@ -38,6 +50,7 @@ class IntentTestActivity : AppCompatActivity() {
     private fun init() {
         binding = ActivityIntentTestBinding.inflate(layoutInflater)
         pkgList = getAndDisplayAllPackages()
+        initRetrofit()
 
         binding.intentDialBtn.setOnClickListener {
             dialPhoneNumber("01075705994")
@@ -61,6 +74,45 @@ class IntentTestActivity : AppCompatActivity() {
         binding.intentMediaPlaySearch.setOnClickListener {
             playSearchArtist()
         }
+
+        binding.commandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when (p2) {
+                    0 -> dataToPost["appExec"] = "실행"
+                    1 -> dataToPost["appExec"] = "검색"
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+        binding.appSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when (p2) {
+                    0 -> dataToPost["appName"] = "유튜브"
+                    1 -> dataToPost["appName"] = "구글"
+                    2 -> dataToPost["appName"] = "네이버"
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+        binding.postAndLaunchBtn.setOnClickListener {
+            dataToPost["searchKeyword"] = binding.query2EditText.text.toString()
+            postCommand(dataToPost)
+        }
+
+    }
+
+    private fun initRetrofit() {
+        val retrofit = Retrofit.Builder().baseUrl("https://b4qhlvm5rokz3gwxqsyj6jqozu0rnvzz.lambda-url.ap-northeast-2.on.aws/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofitService = retrofit.create(RetrofitInterface::class.java)
     }
 
     private fun playSearchArtist() {
@@ -115,18 +167,14 @@ class IntentTestActivity : AppCompatActivity() {
     }
 
     private fun onlyForSearch(query: String) {
-        var intent = Intent(Intent.ACTION_WEB_SEARCH)
+        val input = HashMap<String, Any>()
+        var intent : Intent? = null
 
-        intent = makeIntentSpecific(intent, "nhn")
+        input.put("appName", "네이버")
+        input.put("appExec", "검색")
+        input.put("searchKeyword", query)
 
-        intent.putExtra(SearchManager.QUERY, query)
-
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "naver app not installed", Toast.LENGTH_SHORT).show()
-        }
-
+        postCommand(input)
     }
 
     private fun getAndDisplayAllPackages(): MutableList<PackageInfo> {
@@ -178,5 +226,31 @@ class IntentTestActivity : AppCompatActivity() {
         }
 
         return intent
+    }
+
+    private fun postCommand(data : HashMap<String, Any>) {
+        retrofitService.postData(data).enqueue(object : Callback<TestingDirective> {
+            override fun onResponse(
+                call: Call<TestingDirective>,
+                response: Response<TestingDirective>
+            ) {
+                Log.d("directiveCheck", response.body().toString())
+                response.body()?.let{
+                    val intentUri = it.directives[0].data.url
+                    try {
+                        intent = Intent.parseUri(intentUri, Intent.URI_INTENT_SCHEME)
+                        intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Toast.makeText(this@IntentTestActivity, "allocated app doesn't exist", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<TestingDirective>, t: Throwable) {
+                Log.d("directiveCheck", "failed")
+            }
+        })
     }
 }
