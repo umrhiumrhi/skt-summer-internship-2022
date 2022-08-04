@@ -37,7 +37,7 @@ class ExternalAppControl(val context: Context) {
             var packageManager = context.packageManager
             val installedPackage = packageManager.getInstalledPackages(0)
             // TODO: 외부에서 설정값 유입 가능 후보(1)
-            val actionList: List<String> = listOf(Intent.ACTION_MAIN/*,Intent.ACTION_SEARCH,Intent.ACTION_VIEW*/)
+            val actionList: List<String> = listOf(Intent.ACTION_MAIN,Intent.ACTION_SEARCH,Intent.ACTION_VIEW,Intent.ACTION_WEB_SEARCH)
             //  println("\"applicationList\" : [ {")
             val jsonObjectApplcation = JSONObject()
             val jsonObjectApplcationList = JSONArray()
@@ -53,11 +53,12 @@ class ExternalAppControl(val context: Context) {
                 if (browser.equals(packageName)) {
                     TLog.w(TAG, "found!")
                 }
-    */
+    */          val jsonObjectAppinfo = JSONObject()
+                val jsonObjectintentList = JSONArray()
                 for (action in actionList) {
                     val intent = Intent(action)
                     // TODO: 외부에서 설정값 유입 가능 후보(2)
-                    intent.addCategory(Intent.CATEGORY_LAUNCHER)
+                    if (action == Intent.ACTION_MAIN) intent.addCategory(Intent.CATEGORY_LAUNCHER)
                     intent.setPackage(packageName)
                     val ris: List<ResolveInfo> = packageManager.queryIntentActivities(intent, 0)
 
@@ -67,8 +68,7 @@ class ExternalAppControl(val context: Context) {
 //                println("\"appInfo\" : [{")
 //                println("\"appName\" =  \" $appLabel\" \n \"packageName\" :\" $packageName\"")
 //                println("\"intentList\" : [{")
-                    val jsonObjectAppinfo = JSONObject()
-                    val jsonObjectintentList = JSONArray()
+
                     for (ri in ris) {
                         val packageName = ri.activityInfo.packageName
                         val className = ri.activityInfo.name
@@ -96,13 +96,14 @@ class ExternalAppControl(val context: Context) {
                         jsonObjectIntentinfo.put("intentInfo", jsonObjectIntentinfoValue)
                         jsonObjectintentList.put(jsonObjectIntentinfo)
                     }
-                    jsonObjectAppinfo.put("appName", appLabel)
-                    jsonObjectAppinfo.put("packageName", packageName)
-                    jsonObjectAppinfo.put("intentList", jsonObjectintentList)
+                }
+                if (jsonObjectintentList.isNull(0)) continue
+                jsonObjectAppinfo.put("appName", appLabel)
+                jsonObjectAppinfo.put("packageName", packageName)
+                jsonObjectAppinfo.put("intentList", jsonObjectintentList)
 //                println("    }  ] ")
 //                println("} ]")
-                    jsonObjectApplcationList.put(jsonObjectAppinfo)
-                }
+                jsonObjectApplcationList.put(jsonObjectAppinfo)
                 jsonObjectApplcation.put("applicationList", jsonObjectApplcationList)
 //            println(" ------------------------------------------------------  " )
             }
